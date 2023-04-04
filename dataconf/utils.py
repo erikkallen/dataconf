@@ -50,6 +50,8 @@ def is_optional(type: Type):
 def __parse(value: any, clazz: Type, path: str, strict: bool, ignore_unexpected: bool):
     if is_dataclass(clazz):
         if not isinstance(value, ConfigTree):
+            if value is None:
+                return
             raise TypeConfigException(
                 f"expected type {clazz} at {path}, got {type(value)}"
             )
